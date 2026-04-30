@@ -1,0 +1,377 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0C6E378A019F7F1B526C58D1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E1EFF6F83E8FA0917D110726 /* Assets.xcassets */; };
+		13828694F7CAD68C3A3EB16F /* CalendarService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E3AE6473A0B910A88DD064 /* CalendarService.swift */; };
+		203FCF9FC3826ED73AF8D403 /* TaskEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1852D483334FF0324AAD18A7 /* TaskEditor.swift */; };
+		27D16697BCF281AB4129374B /* TaskListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F7667ED73732F29B9D305E /* TaskListView.swift */; };
+		3D9DD3516B853C1D36AE1698 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A42BF52E311AE442611298 /* SettingsView.swift */; };
+		416BA1E5C00BE090EC9CBC05 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0533E26CB3B8526EB69F7866 /* APIClient.swift */; };
+		620FDFA211801114B5EC0B80 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D29BAE9CF99272EEBCCB8D9 /* RootView.swift */; };
+		B37A29CA2B86F1F2134DBD9A /* SchedulrApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6078F94FF7B44CEC2DA90EE /* SchedulrApp.swift */; };
+		BFB8C13D7210420420DB8AA6 /* TaskItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E36DCD76E9A562E4BEB61C /* TaskItem.swift */; };
+		E7DE62BE56CE3243F052ED37 /* TodayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776353BAF2FDA3D2F18E01D1 /* TodayView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		0533E26CB3B8526EB69F7866 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
+		08E36DCD76E9A562E4BEB61C /* TaskItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskItem.swift; sourceTree = "<group>"; };
+		1852D483334FF0324AAD18A7 /* TaskEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskEditor.swift; sourceTree = "<group>"; };
+		3D29BAE9CF99272EEBCCB8D9 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
+		46F7667ED73732F29B9D305E /* TaskListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListView.swift; sourceTree = "<group>"; };
+		51E3AE6473A0B910A88DD064 /* CalendarService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarService.swift; sourceTree = "<group>"; };
+		776353BAF2FDA3D2F18E01D1 /* TodayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayView.swift; sourceTree = "<group>"; };
+		95A42BF52E311AE442611298 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		B6078F94FF7B44CEC2DA90EE /* SchedulrApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulrApp.swift; sourceTree = "<group>"; };
+		E1EFF6F83E8FA0917D110726 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		ED1669990F95A270D8421F0A /* Schedulr.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = Schedulr.app; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		18ECFAA329903E0345E15E9E /* Schedulr */ = {
+			isa = PBXGroup;
+			children = (
+				E1EFF6F83E8FA0917D110726 /* Assets.xcassets */,
+				CFF1D58BF4DE9A7A4E7D0D58 /* App */,
+				6508C0E60C243C03A8784F75 /* Models */,
+				A21A7168093398828F3098B2 /* Services */,
+				90308683273250BAF7AD9F47 /* Views */,
+			);
+			path = Schedulr;
+			sourceTree = "<group>";
+		};
+		6508C0E60C243C03A8784F75 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				08E36DCD76E9A562E4BEB61C /* TaskItem.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		7DA33EF180BFE748754E260F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				ED1669990F95A270D8421F0A /* Schedulr.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		90308683273250BAF7AD9F47 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				3D29BAE9CF99272EEBCCB8D9 /* RootView.swift */,
+				95A42BF52E311AE442611298 /* SettingsView.swift */,
+				1852D483334FF0324AAD18A7 /* TaskEditor.swift */,
+				46F7667ED73732F29B9D305E /* TaskListView.swift */,
+				776353BAF2FDA3D2F18E01D1 /* TodayView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		A21A7168093398828F3098B2 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				0533E26CB3B8526EB69F7866 /* APIClient.swift */,
+				51E3AE6473A0B910A88DD064 /* CalendarService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		CFF1D58BF4DE9A7A4E7D0D58 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				B6078F94FF7B44CEC2DA90EE /* SchedulrApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		DA87DFE25BCBBD3FE4051A6A = {
+			isa = PBXGroup;
+			children = (
+				18ECFAA329903E0345E15E9E /* Schedulr */,
+				7DA33EF180BFE748754E260F /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		0528AE198A70C4BD4AF58DC6 /* Schedulr */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FE33FD935A96C26BC2824A15 /* Build configuration list for PBXNativeTarget "Schedulr" */;
+			buildPhases = (
+				00E47E64C04BCD43988C8B0E /* Sources */,
+				A0E395A7FAB6F05DB2805F9A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Schedulr;
+			packageProductDependencies = (
+			);
+			productName = Schedulr;
+			productReference = ED1669990F95A270D8421F0A /* Schedulr.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		C550EAC07FF84B19FF6AF8CE /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+				};
+			};
+			buildConfigurationList = 91F253A1C7317B15B895414D /* Build configuration list for PBXProject "Schedulr" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = DA87DFE25BCBBD3FE4051A6A;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 7DA33EF180BFE748754E260F /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				0528AE198A70C4BD4AF58DC6 /* Schedulr */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A0E395A7FAB6F05DB2805F9A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0C6E378A019F7F1B526C58D1 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		00E47E64C04BCD43988C8B0E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				416BA1E5C00BE090EC9CBC05 /* APIClient.swift in Sources */,
+				13828694F7CAD68C3A3EB16F /* CalendarService.swift in Sources */,
+				620FDFA211801114B5EC0B80 /* RootView.swift in Sources */,
+				B37A29CA2B86F1F2134DBD9A /* SchedulrApp.swift in Sources */,
+				3D9DD3516B853C1D36AE1698 /* SettingsView.swift in Sources */,
+				203FCF9FC3826ED73AF8D403 /* TaskEditor.swift in Sources */,
+				BFB8C13D7210420420DB8AA6 /* TaskItem.swift in Sources */,
+				27D16697BCF281AB4129374B /* TaskListView.swift in Sources */,
+				E7DE62BE56CE3243F052ED37 /* TodayView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		15FCB2E6F569A2C7B7D371BD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_KEY_CFBundleDisplayName = Schedulr;
+				INFOPLIST_KEY_NSCalendarsFullAccessUsageDescription = "Schedulr reads your calendar to schedule tasks around existing events and writes accepted tasks back to your calendar.";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.arnavshah.schedulr;
+				SDKROOT = iphoneos;
+				SUPPORTS_MACCATALYST = NO;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		3143D4A4D52263510BF9B4AB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_KEY_CFBundleDisplayName = Schedulr;
+				INFOPLIST_KEY_NSCalendarsFullAccessUsageDescription = "Schedulr reads your calendar to schedule tasks around existing events and writes accepted tasks back to your calendar.";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.arnavshah.schedulr;
+				SDKROOT = iphoneos;
+				SUPPORTS_MACCATALYST = NO;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		368247F6FF3AE695B23E41F2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 0.1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.10;
+			};
+			name = Debug;
+		};
+		FE82E4628A6D9B910E4A6C2E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 0.1.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.10;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		91F253A1C7317B15B895414D /* Build configuration list for PBXProject "Schedulr" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				368247F6FF3AE695B23E41F2 /* Debug */,
+				FE82E4628A6D9B910E4A6C2E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		FE33FD935A96C26BC2824A15 /* Build configuration list for PBXNativeTarget "Schedulr" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				15FCB2E6F569A2C7B7D371BD /* Debug */,
+				3143D4A4D52263510BF9B4AB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = C550EAC07FF84B19FF6AF8CE /* Project object */;
+}

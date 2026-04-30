@@ -1,0 +1,25 @@
+{
+  "name": "schedulr-server",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "vercel dev",
+    "deploy": "vercel deploy",
+    "deploy:prod": "vercel deploy --prod",
+    "typecheck": "tsc --noEmit",
+    "test": "node --test --import tsx --experimental-test-module-mocks lib/validate.test.ts"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.88.0",
+    "@vercel/node": "^5.0.0",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "tsx": "^4.21.0",
+    "typescript": "^5.6.0"
+  }
+}
