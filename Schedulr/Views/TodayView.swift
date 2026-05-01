@@ -72,6 +72,18 @@ struct TodayView: View {
         allTasks.filter { $0.status == .pending }
     }
 
+    private var scheduledForSelectedDate: [TaskItem] {
+        let calendar = Calendar.current
+        let dayStart = calendar.startOfDay(for: selectedDate)
+        guard let dayEnd = calendar.date(byAdding: .day, value: 1, to: dayStart) else { return [] }
+        return allTasks
+            .filter { task in
+                guard task.status == .scheduled, let start = task.scheduledStart else { return false }
+                return start >= dayStart && start < dayEnd
+            }
+            .sorted { ($0.scheduledStart ?? .distantPast) < ($1.scheduledStart ?? .distantPast) }
+    }
+
     private var canGenerate: Bool {
         guard !generation.isLoading else { return false }
         guard !backendBaseURL.isEmpty else { return false }
@@ -124,7 +136,7 @@ struct TodayView: View {
 
     private var timeline: some View {
         Group {
-            if events.isEmpty {
+            if events.isEmpty && pendingTasks.isEmpty && scheduledForSelectedDate.isEmpty {
                 ContentUnavailableView(
                     "Nothing on the calendar",
                     systemImage: "sparkles",
@@ -132,9 +144,25 @@ struct TodayView: View {
                 )
             } else {
                 List {
-                    Section("Existing events") {
-                        ForEach(events) { event in
-                            BusyBlockRow(event: event)
+                    if !scheduledForSelectedDate.isEmpty {
+                        Section("Scheduled today") {
+                            ForEach(scheduledForSelectedDate) { task in
+                                ScheduledTaskRow(task: task)
+                            }
+                        }
+                    }
+                    if !events.isEmpty {
+                        Section("Existing events") {
+                            ForEach(events) { event in
+                                BusyBlockRow(event: event)
+                            }
+                        }
+                    }
+                    if !pendingTasks.isEmpty {
+                        Section("To schedule") {
+                            ForEach(pendingTasks) { task in
+                                PendingTaskRow(task: task)
+                            }
                         }
                     }
                 }
@@ -237,6 +265,78 @@ private struct BusyBlockRow: View {
         if event.isAllDay { return "All day" }
         let f = Date.FormatStyle.dateTime.hour().minute()
         return "\(event.start.formatted(f)) – \(event.end.formatted(f))"
+    }
+}
+
+private struct PendingTaskRow: View {
+    let task: TaskItem
+
+    var body: some View {
+        HStack(spacing: 12) {
+            Image(systemName: priorityIcon)
+                .foregroundStyle(priorityColor)
+                .frame(width: 22)
+            VStack(alignment: .leading, spacing: 2) {
+                Text(task.title).font(.body)
+                HStack(spacing: 8) {
+                    Label(durationLabel, systemImage: "clock")
+                    if let deadline = task.deadline {
+                        Label(deadline.formatted(date: .abbreviated, time: .omitted), systemImage: "flag")
+                    }
+                }
+                .font(.caption)
+                .foregroundStyle(.secondary)
+            }
+        }
+        .padding(.vertical, 2)
+    }
+
+    private var priorityIcon: String {
+        switch task.priority {
+        case .low: "circle"
+        case .normal: "circle.fill"
+        case .high: "exclamationmark.circle.fill"
+        }
+    }
+
+    private var priorityColor: Color {
+        switch task.priority {
+        case .low: .secondary
+        case .normal: .accentColor
+        case .high: .red
+        }
+    }
+
+    private var durationLabel: String {
+        let minutes = task.estimatedMinutes
+        if minutes >= 60, minutes % 60 == 0 { return "\(minutes / 60) hr" }
+        if minutes >= 60 { return "\(minutes / 60) hr \(minutes % 60) min" }
+        return "\(minutes) min"
+    }
+}
+
+private struct ScheduledTaskRow: View {
+    let task: TaskItem
+
+    var body: some View {
+        HStack(spacing: 12) {
+            Image(systemName: "calendar.badge.checkmark")
+                .foregroundStyle(.green)
+                .frame(width: 22)
+            VStack(alignment: .leading, spacing: 2) {
+                Text(task.title).font(.body)
+                Text(timeLabel)
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
+        }
+        .padding(.vertical, 2)
+    }
+
+    private var timeLabel: String {
+        guard let start = task.scheduledStart, let end = task.scheduledEnd else { return "" }
+        let f = Date.FormatStyle.dateTime.hour().minute()
+        return "\(start.formatted(f)) – \(end.formatted(f))"
     }
 }
 
