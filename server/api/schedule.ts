@@ -33,7 +33,7 @@ export default async function handler(
   const userPrompt = buildSchedulePrompt(body, prefs);
 
   try {
-    const { schedule, usage } = await callScheduler(userPrompt);
+    const { schedule, usage } = await callScheduler(userPrompt, { endpoint: "schedule" });
     const repaired = validateAndRepair(body, schedule);
     res.status(200).json({ ...repaired, usage });
   } catch (err) {
@@ -42,15 +42,10 @@ export default async function handler(
       return;
     }
     if (err instanceof Anthropic.APIError) {
-      res.status(err.status ?? 500).json({
-        error: "anthropic_api_error",
-        message: err.message,
-      });
+      res.status(err.status ?? 500).json({ error: "anthropic_api_error" });
       return;
     }
-    res.status(500).json({
-      error: "internal_error",
-      message: err instanceof Error ? err.message : String(err),
-    });
+    console.error("schedule_internal_error", err);
+    res.status(500).json({ error: "internal_error" });
   }
 }
