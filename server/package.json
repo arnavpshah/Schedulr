@@ -7,7 +7,7 @@
     "node": ">=20"
   },
   "scripts": {
-    "dev": "vercel dev",
+    "serve": "vercel dev",
     "deploy": "vercel deploy",
     "deploy:prod": "vercel deploy --prod",
     "typecheck": "tsc --noEmit",

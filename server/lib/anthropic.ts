@@ -40,30 +40,46 @@ export type Usage = {
 
 export async function callScheduler(
   userPrompt: string,
+  meta: { endpoint: "schedule" | "refine" } = { endpoint: "schedule" },
 ): Promise<{ schedule: ScheduleResponse; usage: Usage }> {
-  const response = await anthropic.messages.create({
-    model: "claude-opus-4-7",
-    max_tokens: 8000,
-    thinking: { type: "adaptive" },
-    output_config: {
-      effort: "high",
-      format: {
-        type: "json_schema",
-        schema: SCHEDULE_RESPONSE_JSON_SCHEMA,
+  const t0 = Date.now();
+  let response;
+  try {
+    response = await anthropic.messages.create({
+      model: "claude-opus-4-7",
+      max_tokens: 8000,
+      thinking: { type: "adaptive" },
+      output_config: {
+        effort: "high",
+        format: {
+          type: "json_schema",
+          schema: SCHEDULE_RESPONSE_JSON_SCHEMA,
+        },
       },
-    },
-    system: [
-      {
-        type: "text",
-        text: SYSTEM_PROMPT,
-        cache_control: { type: "ephemeral" },
-      },
-    ],
-    messages: [{ role: "user", content: userPrompt }],
-  });
+      system: [
+        {
+          type: "text",
+          text: SYSTEM_PROMPT,
+          cache_control: { type: "ephemeral" },
+        },
+      ],
+      messages: [{ role: "user", content: userPrompt }],
+    });
+  } catch (err) {
+    logScheduler({ endpoint: meta.endpoint, ms: Date.now() - t0, ok: false, error: err });
+    throw err;
+  }
+
+  const usage: Usage = {
+    input_tokens: response.usage.input_tokens,
+    output_tokens: response.usage.output_tokens,
+    cache_read_input_tokens: response.usage.cache_read_input_tokens,
+    cache_creation_input_tokens: response.usage.cache_creation_input_tokens,
+  };
 
   const textBlock = response.content.find((b) => b.type === "text");
   if (!textBlock || textBlock.type !== "text") {
+    logScheduler({ endpoint: meta.endpoint, ms: Date.now() - t0, ok: false, usage, error: "no_text_block" });
     throw new SchedulerError("no_text_block_in_response", 502);
   }
 
@@ -71,23 +87,47 @@ export async function callScheduler(
   try {
     parsedJson = JSON.parse(textBlock.text);
   } catch {
+    logScheduler({ endpoint: meta.endpoint, ms: Date.now() - t0, ok: false, usage, error: "invalid_json" });
     throw new SchedulerError("model_returned_invalid_json", 502);
   }
 
   const parsed = ScheduleResponse.safeParse(parsedJson);
   if (!parsed.success) {
+    logScheduler({ endpoint: meta.endpoint, ms: Date.now() - t0, ok: false, usage, error: "schema_mismatch" });
     throw new SchedulerError("model_response_failed_schema", 502);
   }
 
-  return {
-    schedule: parsed.data,
-    usage: {
-      input_tokens: response.usage.input_tokens,
-      output_tokens: response.usage.output_tokens,
-      cache_read_input_tokens: response.usage.cache_read_input_tokens,
-      cache_creation_input_tokens: response.usage.cache_creation_input_tokens,
-    },
-  };
+  logScheduler({ endpoint: meta.endpoint, ms: Date.now() - t0, ok: true, usage });
+
+  return { schedule: parsed.data, usage };
+}
+
+function logScheduler(entry: {
+  endpoint: "schedule" | "refine";
+  ms: number;
+  ok: boolean;
+  usage?: Usage;
+  error?: unknown;
+}): void {
+  const { endpoint, ms, ok, usage, error } = entry;
+  const cacheHit =
+    usage && usage.cache_read_input_tokens != null && usage.cache_read_input_tokens > 0;
+  const errorCode =
+    error instanceof Error ? error.name : typeof error === "string" ? error : undefined;
+  console.log(
+    JSON.stringify({
+      tag: "scheduler_call",
+      endpoint,
+      ok,
+      ms,
+      cacheHit: cacheHit ?? false,
+      cacheRead: usage?.cache_read_input_tokens ?? 0,
+      cacheCreate: usage?.cache_creation_input_tokens ?? 0,
+      inputTokens: usage?.input_tokens ?? 0,
+      outputTokens: usage?.output_tokens ?? 0,
+      ...(errorCode ? { error: errorCode } : {}),
+    }),
+  );
 }
 
 export class SchedulerError extends Error {

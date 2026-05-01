@@ -18,6 +18,7 @@ struct TaskEditor: View {
     @State private var hasDeadline: Bool = false
     @State private var deadline: Date = .now.addingTimeInterval(60 * 60 * 24)
     @State private var notes: String = ""
+    @State private var recurrence: TaskRecurrence = .none
 
     private static let durationPresets = [15, 30, 45, 60, 90, 120]
 
@@ -44,6 +45,17 @@ struct TaskEditor: View {
                     Toggle("Has deadline", isOn: $hasDeadline)
                     if hasDeadline {
                         DatePicker("By", selection: $deadline, displayedComponents: [.date, .hourAndMinute])
+                    }
+                }
+                Section {
+                    Picker("Repeats", selection: $recurrence) {
+                        ForEach(TaskRecurrence.allCases) { Text($0.label).tag($0) }
+                    }
+                } header: {
+                    Text("Recurrence")
+                } footer: {
+                    if recurrence != .none {
+                        Text("Each time you generate, this task appears in the pending list for the day if it hasn't already been scheduled. Applying creates a one-off scheduled copy and leaves this template for the next occurrence.")
                     }
                 }
                 Section("Notes") {
@@ -79,6 +91,7 @@ struct TaskEditor: View {
             hasDeadline = task.deadline != nil
             if let d = task.deadline { deadline = d }
             notes = task.notes ?? ""
+            recurrence = task.recurrence
         }
     }
 
@@ -95,7 +108,8 @@ struct TaskEditor: View {
                 estimatedMinutes: estimatedMinutes,
                 priority: priority,
                 deadline: resolvedDeadline,
-                notes: resolvedNotes
+                notes: resolvedNotes,
+                recurrence: recurrence
             )
             modelContext.insert(task)
         case .edit(let task):
@@ -104,6 +118,7 @@ struct TaskEditor: View {
             task.priority = priority
             task.deadline = resolvedDeadline
             task.notes = resolvedNotes
+            task.recurrence = recurrence
         }
         dismiss()
     }

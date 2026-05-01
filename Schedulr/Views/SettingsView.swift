@@ -5,6 +5,8 @@ struct SettingsView: View {
     @AppStorage("backendAPIKey") private var backendAPIKey: String = ""
     @AppStorage("preferMornings") private var preferMornings: Bool = true
     @AppStorage("bufferMinutes") private var bufferMinutes: Int = 5
+    @AppStorage("dayStartHour") private var dayStartHour: Int = 8
+    @AppStorage("dayEndHour") private var dayEndHour: Int = 22
 
     @State private var calendar = CalendarService()
     @State private var healthState: HealthState = .idle
@@ -42,7 +44,7 @@ struct SettingsView: View {
                     if case let .failure(message) = healthState {
                         Text(message)
                             .font(.caption)
-                            .foregroundStyle(.red)
+                            .foregroundStyle(.primary)
                     }
                     if case let .success(response) = healthState {
                         Text("\(response.service) v\(response.version)\(response.requiresApiKey ? " · auth required" : "")")
@@ -55,11 +57,31 @@ struct SettingsView: View {
                     Text("Your Vercel-hosted scheduler endpoint. The API key is sent as the x-api-key header.")
                 }
 
-                Section("Scheduling Preferences") {
+                Section {
+                    DatePicker(
+                        "Day starts",
+                        selection: dayStartBinding,
+                        displayedComponents: .hourAndMinute
+                    )
+                    DatePicker(
+                        "Day ends",
+                        selection: dayEndBinding,
+                        displayedComponents: .hourAndMinute
+                    )
                     Stepper(value: $bufferMinutes, in: 0...60, step: 5) {
                         LabeledContent("Buffer between items", value: "\(bufferMinutes) min")
                     }
                     Toggle("Prefer mornings for high-priority", isOn: $preferMornings)
+                } header: {
+                    Text("Scheduling Preferences")
+                } footer: {
+                    if dayEndHour <= dayStartHour {
+                        Text("⚠ End must be after start.")
+                            .fontWeight(.semibold)
+                            .foregroundStyle(.primary)
+                    } else {
+                        Text("Schedulr will only place tasks inside this window.")
+                    }
                 }
 
                 Section("About") {
@@ -74,6 +96,26 @@ struct SettingsView: View {
         }
     }
 
+    private var dayStartBinding: Binding<Date> {
+        hourBinding($dayStartHour)
+    }
+
+    private var dayEndBinding: Binding<Date> {
+        hourBinding($dayEndHour)
+    }
+
+    private func hourBinding(_ source: Binding<Int>) -> Binding<Date> {
+        Binding(
+            get: {
+                Calendar.current.date(bySettingHour: source.wrappedValue, minute: 0, second: 0, of: .now) ?? .now
+            },
+            set: { newValue in
+                let hour = Calendar.current.component(.hour, from: newValue)
+                source.wrappedValue = hour
+            }
+        )
+    }
+
     @ViewBuilder
     private var healthIndicator: some View {
         switch healthState {
@@ -82,9 +124,9 @@ struct SettingsView: View {
         case .checking:
             ProgressView()
         case .success:
-            Image(systemName: "checkmark.circle.fill").foregroundStyle(.green)
+            Image(systemName: "checkmark.circle.fill").foregroundStyle(.primary)
         case .failure:
-            Image(systemName: "xmark.octagon.fill").foregroundStyle(.red)
+            Image(systemName: "xmark.octagon.fill").foregroundStyle(.primary)
         }
     }
 
